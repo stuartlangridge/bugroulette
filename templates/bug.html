@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <h2>So, you wanna help the open source community out?</h2>
+
+    <p>Fancy fixing this bug in the {{ project.name }} project?</p>
+    <div class="bug">
+        <h3>{{ bug.title }}</h3>
+        <ul>
+            <li><a href="{{ bug.link }}">Yeah, that sounds interesting!</a></li>
+            <li><a href="./">nah m8, find something better</a></li>
+            <li><a href="../">show me the list of projects again</a></li>
+        </ul>
+    </div>
+{% endblock %}

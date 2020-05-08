@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <h2>So, you wanna help the open source community out?</h2>
+
+    <p>Hit the button to find a bug to fix!</p>
+
+    <a class="button" href="/any/">Find me a bug to fix!</a>
+
+    <div class="project_list">
+        <p>Or if you want, find a bug to fix in one of these specific projects:</p>
+        <ul>
+            {% for p in g.projects %}<li><a href="/{{p}}">{{p}}</a></li>
+            {% endfor %}
+        </ul>
+{% endblock %}
