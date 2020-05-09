@@ -64,6 +64,11 @@ def get_individual(bug_number, known_good=False):
         return False, None
     soup = BeautifulSoup(fp.read(), "lxml")
     fp.close()
+    project = soup.select("div#watermark a")[0]["href"].split("/")[-1]
+    if project != "ubuntu":
+        print("Not Ubuntu project:", project)
+        db_store(bug_number, False)
+        return False, None
     dupe = soup.select("div#bug-is-duplicate .bug-duplicate-details a")
     if dupe:
         override_result = dupe[0]["href"].split("/")[-1]
