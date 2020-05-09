@@ -22,6 +22,10 @@ def get(max_bug, override_result=None):
             continue
         soup = BeautifulSoup(fp.read(), "lxml")
         fp.close()
+        project = soup.select("div#watermark a")[0]["href"].split("/")[-1]
+        if project != "ubuntu":
+            print("Not ubuntu project:", project)
+            continue
         dupe = soup.select("div#bug-is-duplicate .bug-duplicate-details a")
         if dupe:
             override_result = dupe[0]["href"].split("/")[-1]
