@@ -27,7 +27,11 @@ def get(max_bug, override_result=None):
             override_result = dupe[0]["href"].split("/")[-1]
             print("Duplicate of", override_result)
             continue
-        status = soup.select("div.status-content")[0].text.strip()
+        try:
+            status = soup.select("div.status-content")[0].text.strip()
+        except IndexError:
+            print("Bug unreadable")
+            continue
         if status in ("New", "Incomplete", "Confirmed"):
             title = soup.select("h1#edit-title")[0].text.strip()
             return {
@@ -35,7 +39,7 @@ def get(max_bug, override_result=None):
                 "link": bug_page
             }
         else:
-            print("bad status", status)
+            print("Not seeking contributions: status", status)
             continue
 
 
