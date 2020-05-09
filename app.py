@@ -3,7 +3,7 @@ import random
 import glob
 import time
 import importlib.util
-from flask import Flask, g, abort, render_template
+from flask import Flask, g, abort, render_template, request
 
 app = Flask(__name__)
 
@@ -62,5 +62,5 @@ def for_project(project_name):
                 max_bug = int(project["get_max_bug_number"]())
                 with open(project["max_file"], mode="w") as fp:
                     fp.write(str(max_bug))
-    bug = project["get"](max_bug)
+    bug = project["get"](max_bug, known_good="quick" in request.args)
     return render_template("bug.html", bug=bug, project=project)
